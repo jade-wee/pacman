@@ -8,7 +8,8 @@ Repository includes html, javascript and image files. Download them and ensure i
 <br>You may also view the demo website <a href="https://jadewee.github.io/projects/pacmen.html">here.
 
 <h3>Roadmap of future improvements</h3>
-  <ul>This is my plan to work on next in this repository:
+  This is my plan to work on next in this repository:
+  <ul>
     <li>Change colours of PacMen(s) when it hits the screen</li>
     <li>Add a button to stop the movements</li>
     <li>Add a button to clear the screen</li>
