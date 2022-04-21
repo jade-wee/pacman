@@ -1,16 +1,21 @@
 <h1>Project Title: Bouncing Pacman(s)</h1>
 
-<h3>Project Description</h3>
+<h2>Project Description</h2>
 An interactive website where users can add PacMen(s) to the screen. A start button is included to trigger the visualization and see the PacMen(s) bounce when it hits the corners of the screen.
 
-<h3>How to Run</h3>
+<h2>How to Run</h2>
 Repository includes html, javascript and image files. Download them and ensure it's in the same file structure.
 <br>You may also view the demo website <a href="https://jadewee.github.io/projects/pacmen.html">here.
 
 <h3>Roadmap of future improvements</h3>
-An interactive website where users can add PacMen(s) to the screen and see it bounce when it hits the corners.
+  <ul>This is my plan to work on next in this repository:
+    <li>Change colours of PacMen(s) when it hits the screen</li>
+    <li>Add a button to stop the movements</li>
+    <li>Add a button to clear the screen</li>
+    <li>Have the PacMen(s) bounce off each other</li>
+  </ul>
 
-<h3>License</h3>
+<h2>License</h3>
 MIT License
 
 Copyright (c) 2022 Christopher Maldonado
