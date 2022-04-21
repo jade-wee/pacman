@@ -1,6 +1,6 @@
 <h1>Project Title: Bouncing Pacman(s)</h1>
 
-<h2>Project Description</h3>
+<h3>Project Description</h3>
 An interactive website where users can add PacMen(s) to the screen. A start button is included to trigger the visualization and see the PacMen(s) bounce when it hits the corners of the screen.
 
 <h3>How to Run</h3>
