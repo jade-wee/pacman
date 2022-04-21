@@ -1,57 +1,69 @@
-// pos is the PacMan image position variable- it is set to 0 initially
 var pos = 0;
-//pageWidth is the width of the webpage. This is later used to calculate when Pac-Man needs to turn around. 
-let pageWidth = window.innerWidth;
-//This array contains all the PacMan movement images
-const pacArray = [
-  ['./images/PacMan1.png', './images/PacMan2.png'],
-  ['./images/PacMan3.png', './images/PacMan4.png'],
-];
-
-// this variable defines what direction should PacMan go into:
-// 0 = left to right
-// 1 = right to left (reverse)
+const pacArray = ['../images/pacman1.png', '../images/pacman2.png','../images/pacman3.png', '../images/pacman4.png'];
 var direction = 0;
+const pacMen = [];
 
-// This variable helps determine which PacMan image should be displayed. It flips between values 0 and 1
-var focus = 0;
-
-// This function is called on mouse click. Every time it is called, it updates the PacMan image, position and direction on the screen.
-function Run() {
-  let img = document.getElementById('PacMan');
-  let imgWidth = img.width;
-  focus = (focus + 1) % 2;
-  direction = checkPageBounds(direction, imgWidth, pos, pageWidth);
-  img.src = pacArray[direction][focus];
-  
-  if (direction) {
-    pos -= 20;
-    img.style.left = pos + 'px';
-  } else {
-    pos += 20;
-    img.style.left = pos + 'px';
-  }
+function setToRandom(scale) {
+  return {
+    x: Math.random() * scale,
+    y: Math.random() * scale,
+  };
 }
-// TODO: Add a Javascript setInterval() method that will call the Run() function above every 200 milliseconds. Note: in the video, Dr. Williams uses the setTimeout() method, but here we are going to use a slightly different
-// method called setInterval(), so that you can have practice using this method.
-// Inside of the Run() function you will also have to add an extra argument "pageWidth", which is declared on line 4 when you call the checkPageBounds() function below. 
-
-setInterval(Run,200)
-
-// This function determines the direction of PacMan based on screen edge detection. 
-function checkPageBounds(direction, imgWidth, pos, pageWidth) {
-  //
-  // TODO: Complete this to reverse direction upon hitting screen edge
-  //
-  if (pos + imgWidth >= pageWidth){
-    direction = 1;
-  }
-
-  if (pos < 0){
-    direction = 0;
-  }
-  return direction;
+// Factory to make a PacMan
+function makePac() {
+  // returns an object with values scaled {x: 33, y: 21}
+  let velocity = setToRandom(10);
+  let position = setToRandom(200);
+  // Add image to div id = game
+  let game = document.getElementById('game');
+  let newimg = document.createElement('img');
+  newimg.style.position = 'absolute';
+  // generate random number between 0 to 3
+  let num = Math.floor(Math.random() * 3);
+  newimg.src = pacArray[num].toString();
+  newimg.width = 100;
+  newimg.style.left = position.x;
+  newimg.style.top = position.y;
+  game.appendChild(newimg);
+  // new style of creating an object
+  return {
+    position,
+    velocity,
+    newimg,
+  };
 }
 
-//Please do not change
-module.exports = checkPageBounds;
+function update() {
+  //loop over pacmen array and move each one and move image in DOM
+  pacMen.forEach((item) => {
+    checkCollisions(item);
+    item.position.x += item.velocity.x;
+    item.position.y += item.velocity.y;
+
+    item.newimg.style.left = item.position.x;
+    item.newimg.style.top = item.position.y;
+  });
+  setTimeout(update, 20);
+}
+
+function checkCollisions(item) {
+  if (
+    item.position.x + item.velocity.x + item.newimg.width > window.innerWidth ||
+    item.position.x + item.velocity.x < 0
+  )
+    item.velocity.x = -item.velocity.x;
+  if (
+    item.position.y + item.velocity.y + item.newimg.height > window.innerHeight ||
+    item.position.y + item.velocity.y < 0
+  )
+    item.velocity.y = -item.velocity.y;
+}
+
+function makeOne() {
+  pacMen.push(makePac()); // add a new PacMan
+}
+
+//don't change this line
+if (typeof module !== 'undefined') {
+  module.exports = { checkCollisions, update, pacMen };
+}
