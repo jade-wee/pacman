@@ -19,7 +19,7 @@ function makePac() {
   let newimg = document.createElement('img');
   newimg.style.position = 'absolute';
   // generate random number between 0 to 3
-  let num = Math.floor(Math.random() * 3);
+  let num = Math.floor(Math.random() * (3 + 1));
   newimg.src = pacArray[num].toString();
   newimg.width = 100;
   newimg.style.left = position.x;
